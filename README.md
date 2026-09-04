@@ -155,7 +155,7 @@ FROM cte
 WHERE rn=1;
 ```
 
-8. **Write an SQL query to find the top 5 customers based on the highest total sales. **
+8. **Write an SQL query to find the top 5 customers based on the highest total sales.**
 ```sql
 SELECT customer_id, SUM(total_sale) AS total_sales
 FROM retail_sales
