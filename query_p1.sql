@@ -2,6 +2,7 @@
 SQL Retails Sales Analysis 
 SQL Project Executed by Divyanshu Medatwal, Referecing - https://www.youtube.com/watch?v=ChIQjGBI3AM
 Project Start Date - 3-Sept-2026
+Project Completion Date - 4-Sept-2026
 */
 
 -- Create DatabASe names project_p1
