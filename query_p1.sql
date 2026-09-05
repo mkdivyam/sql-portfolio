@@ -155,6 +155,61 @@ SELECT *,
     WHEN HOUR(sale_time)>17 THEN 'Evening'
     END AS shift
 FROM retail_sales)
-SELECT shift, count(*) AS order_count
+SELECT shift, COUNT(*) AS order_count
 FROM shift_sales
 GROUP BY shift;
+
+
+-- Bonus problems with increased difficulty and complexity
+-- 11. Which product category has the highest profit margin?
+SELECT 
+	category,
+	SUM(total_sale) AS total_sales,
+	ROUND(SUM(quantity*1.0*(price_per_unit - cogs)),2) AS profit,
+    ROUND(SUM(quantity*(price_per_unit - cogs))*100.0/SUM(total_sale),2) AS profit_perc
+FROM retail_sales
+GROUP BY category
+ORDER BY profit_perc DESC;
+
+-- 12. What percentage of customers made more than 10 purchase, and how does their average spend compare to less-frequent buyers?
+WITH cte AS(
+SELECT
+	customer_id, 
+    COUNT(transactions_id) AS order_cnt,
+    SUM(total_sale) AS cust_sales,
+    CASE 
+		WHEN COUNT(transactions_id)<=10 THEN 'Low order volume (<=10 orders)' 
+		WHEN COUNT(transactions_id)<=20 THEN 'Medium order volume (10-20 orders)'
+		ELSE 'High order volume (>20 orders)'
+	END AS order_volume
+FROM retail_sales
+GROUP BY customer_id
+ORDER BY order_cnt)
+SELECT
+	order_volume, 
+	COUNT(customer_id) AS cust_cnt,
+    ROUND(COUNT(customer_id)*100.00/(SELECT COUNT(DISTINCT customer_id) FROM retail_sales),2) AS cust_share_pct,
+    ROUND(SUM(cust_sales)/SUM(order_cnt),2) AS avg_order
+FROM cte
+GROUP BY order_volume
+;
+
+-- 13. What is the month-over-month percentage change in sales, and were there any months with a significant decline?
+WITH cte AS (
+SELECT 
+	YEAR(sale_date) AS sale_year,
+    MONTH(sale_date) AS sale_month,
+    COUNT(transactions_id) AS monthly_order_cnt,
+    SUM(total_sale) AS monthly_sale
+FROM retail_sales
+GROUP BY YEAR(sale_date), MONTH(sale_date)
+ORDER BY sale_year, sale_month),
+cte2 AS (
+	SELECT *,
+	LAG(monthly_order_cnt,1,0) OVER(ORDER BY sale_year, sale_month) AS prev_order_cnt,
+	LAG(monthly_sale,1,0) OVER(ORDER BY sale_year, sale_month) AS prev_month_sale
+FROM cte)
+SELECT *,
+	ROUND(IFNULL((monthly_order_cnt - prev_order_cnt)*100.00/prev_order_cnt,100),2) AS mom_order_perc,
+    ROUND(IFNULL((monthly_sale - prev_month_sale)*100.00/prev_month_sale,100),2) AS mom_order_perc
+FROM cte2;
