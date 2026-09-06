@@ -1,4 +1,4 @@
-# Retail Sales Analysis SQL Project
+# Retail Sales Analysis SQL Project with Additional Business Problems
 
 ## Project Overview
 
@@ -252,6 +252,7 @@ FROM cte2;
 - **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
 - **Category Profit Margins**: Category level profit margins are broadly consistent across the categories, with slight deviations.
 - **Buyers' Frequency**: Over half of the customers have shopped less than 10 times. Little over 6% of the customers have more than 20 transactions. Nevertheless, the average order amount is broadly consistent across all the customer groups.
+- **M-o-M Percentage Change**: There has been a significant decline (>20%) in sales during February each year. 
 
 ## Reports
 
