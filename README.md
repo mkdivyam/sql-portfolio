@@ -6,7 +6,7 @@
 **Level**: Intermediate  
 **Database**: `project_p1`  
 **Publish On**: `04-Sep-2026`  
-**References**: https://www.youtube.com/watch?v=ChIQjGBI3AM
+**References**: https://www.youtube.com/watch?v=ChIQjGBI3AM (Questions 1–10 based on this tutorial; Questions 11–13 are original extensions)
 
 
 ## Intent
@@ -88,7 +88,7 @@ WHERE
     OR total_sale IS NULL;
 ```
 
-### 3. Data Analysis & Findings
+### 3. Data Analysis & Findings (Question #1 - 10: from the reference tutorial)
 
 The following SQL queries were developed to answer specific business questions:
 
@@ -185,6 +185,9 @@ FROM shift_sales
 GROUP BY shift;
 ```
 
+### Original Extensions (Question #11-13)
+*The following three questions extend beyond the reference tutorial, exploring profitability, customer retention, and trend analysis:*
+
 11. **Which product category has the highest profit margin?**
 ```sql
 SELECT 
@@ -239,7 +242,7 @@ cte2 AS (
 FROM cte)
 SELECT *,
 	ROUND(IFNULL((monthly_order_cnt - prev_order_cnt)*100.00/prev_order_cnt,100),2) AS mom_order_perc,
-    ROUND(IFNULL((monthly_sale - prev_month_sale)*100.00/prev_month_sale,100),2) AS mom_order_perc
+    ROUND(IFNULL((monthly_sale - prev_month_sale)*100.00/prev_month_sale,100),2) AS mom_sale_perc
 FROM cte2;
 ```
 
