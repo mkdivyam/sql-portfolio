@@ -250,6 +250,8 @@ FROM cte2;
 - **High-Value Transactions**: Several transactions had a total sale amount greater than 1000, indicating premium purchases.
 - **Sales Trends**: Monthly analysis shows variations in sales, helping identify peak seasons.
 - **Customer Insights**: The analysis identifies the top-spending customers and the most popular product categories.
+- **Category Profit Margins**: Category level profit margins are broadly consistent across the categories, with slight deviations.
+- **Buyers' Frequency**: Over half of the customers have shopped less than 10 times. Little over 6% of the customers have more than 20 transactions. Nevertheless, the average order amount is broadly consistent across all the customer groups.
 
 ## Reports
 
