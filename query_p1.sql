@@ -211,5 +211,5 @@ cte2 AS (
 FROM cte)
 SELECT *,
 	ROUND(IFNULL((monthly_order_cnt - prev_order_cnt)*100.00/prev_order_cnt,100),2) AS mom_order_perc,
-    ROUND(IFNULL((monthly_sale - prev_month_sale)*100.00/prev_month_sale,100),2) AS mom_order_perc
+    ROUND(IFNULL((monthly_sale - prev_month_sale)*100.00/prev_month_sale,100),2) AS mom_sale_perc
 FROM cte2;
